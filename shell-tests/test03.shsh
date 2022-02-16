@@ -1,0 +1,4 @@
+#! ./shsh -f
+
+cat shell-tests/input01.xml | XML.parse | select XML.element | unparse;
+echo "\n"

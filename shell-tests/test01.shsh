@@ -1,0 +1,1 @@
+cat grammar.bnf | foreach line then echo "." else suppress end | count | show | concatenate; echo "\n"

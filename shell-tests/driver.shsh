@@ -1,0 +1,11 @@
+#!shsh -f
+
+ls shell-tests/test*.shsh
+| foreach line
+  then
+     foreach one then echo "-" end;
+     echo "\n";
+     id;
+     echo ":\n";
+     (echo "shsh -f "; id) | execute
+  end

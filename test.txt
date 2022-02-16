@@ -1,0 +1,78 @@
+Expression ::=
+   ProducerPrimary {"|" TransducerPrimary} ["|" ConsumerPrimary].
+
+ProducerExpression ::=
+     ProducerPrimary
+   | ProducerPrimary "|" TransducerExpression.
+
+ProducerPrimary ::=
+   "(" NativeCommand ")" ">"
+   | "cat" Parameters
+   | "echo" Parameters
+   | "ls" Parameters
+   | "stdin"
+   | "{" [String {"," String}] "}"
+   | "(" ProducerExpression ")".
+
+ConsumerExpression ::=
+     ConsumerFork
+   | TransducerExpression "|" ConsumerFork
+
+
+
+ConsumerFork ::=
+   ConsumerPrimary {"tee" ConsumerPrimary}.
+
+ConsumerPrimary ::=
+     "(" ConsumerExpression ")"
+   | ">" "(" NativeCommand ")"
+   | "error" [String]
+   | "suppress"
+   | ">" File
+   | ">>" File.
+
+TransducerExpression ::=
+     TransducerPrimary {"|" TransducerPrimary}
+   | TransducerPrimary {"><" TransducerPrimary}.
+
+TransducerPrimary ::=
+     "(" TransducerExpression ")"
+   | "id"
+   | "count"
+   | "group"
+   | "concatenate"
+   | "uppercase"
+   | "prepend" String
+   | "append" String
+   | "substitute" String
+
+
+
+
+   | NativeCommand.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   | "whitespace"
+   | "line"
+   | "letters"
+   | "digits"
+   | "substring" String
+

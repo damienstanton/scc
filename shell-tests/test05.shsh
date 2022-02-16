@@ -1,0 +1,12 @@
+#! ./shsh -f
+
+cat shell-tests/screensavers.xml
+ | XML.parse
+ | select XML.element-content
+ | foreach XML.element-having-tag-with ((XML.attribute having (XML.attribute-name having substring "_label"))
+                                                       having (XML.attribute-value having prefix substring "GL"))
+   then select (XML.element-content >& XML.element-having-tag-with (XML.element-name having substring "filename"))
+         | (select XML.element-content; (echo "\n" | XML.parse))
+   else suppress
+   end
+ | unparse

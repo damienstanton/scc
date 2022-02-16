@@ -1,0 +1,11 @@
+#! ./shsh -f
+
+cat shell-tests/screensavers.xml
+ | XML.parse
+ | foreach nested XML.element-having-tag-with (XML.element-name having-only substring "filename")
+           in XML.element-content
+           end
+   then select XML.element-content; echo "\n" | XML.parse
+   else suppress
+   end
+ | unparse

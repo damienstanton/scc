@@ -1,0 +1,8 @@
+cat shell-tests/screensavers.xml
+ | XML.parse
+ | select XML.element-content
+ | foreach XML.element then echo X else suppress end
+ | count
+ | show
+ | concatenate;
+echo "\n"

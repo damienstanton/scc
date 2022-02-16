@@ -1,0 +1,1 @@
+cat LICENSE.txt | select ((line having substring GNU) >, substring "\n")

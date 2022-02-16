@@ -1,0 +1,6 @@
+#! ./shsh -f
+
+cat shell-tests/input01.xml
+ | XML.parse
+ | foreach nested >! marked in XML.element-content end
+   then uppercase end

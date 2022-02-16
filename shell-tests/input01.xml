@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<!-- try out various XML features - and try to confuse the parser -->
+<a>This is my <longer-name foo="bar"><![CDATA[[[very]]]]> <a>first</a><c bar='baz'/></longer-name> &lt;XML&gt; test.</a>
+<? the end? ?>

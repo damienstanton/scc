@@ -1,0 +1,73 @@
+Expression ::=
+     Step {";" Step}
+   | Step {"&" Step}.
+
+Step ::=
+   Term {"|" Term}.
+
+Term ::=
+   PrefixTerm
+   [  {"&&" PrefixTerm}
+    | {"||" PrefixTerm}
+    | {">&" PrefixTerm}
+    | {">|" PrefixTerm}
+    | {">," PrefixTerm}
+    | "having" PrefixTerm
+    | "having-only" PrefixTerm
+    | "..." PrefixTerm].
+
+PrefixTerm ::=
+     Primary
+   | "XML.element-having-tag-with" PrefixTerm
+   | "first"      PrefixTerm
+   | "last"       PrefixTerm
+   | "prefix"     PrefixTerm
+   | "suffix"     PrefixTerm
+   | "start-of"   PrefixTerm
+   | "end-of"     PrefixTerm
+   | "prepend"    PrefixTerm
+   | "append"     PrefixTerm
+   | "substitute" PrefixTerm
+   | "select"     PrefixTerm
+   | ">!"         PrefixTerm.
+
+Primary ::=
+     "(" Expression ")"
+   | ">" File
+   | ">>" File
+   | "cat" Parameters
+   | "concatenate"
+   | "count"
+   | "digits"
+   | "echo" Parameters
+   | "error" [String]
+   | "execute"
+   | "everything"
+   | "exit"
+   | "foreach" Expression "then" Expression ["else" Expression] "end" ["foreach"].
+   | "group"
+   | "id"
+   | "if" Expression "then" Expression ["else" Expression] "end" ["if"]
+   | "letters"
+   | "line"
+   | "ls" Parameters
+   | "marked"
+   | "nested" Expression "in" Expression "end" ["nested"]
+   | "nothing"
+   | "stdin"
+   | "substring" String
+   | "suppress"
+   | "unparse"
+   | "uppercase"
+   | "while" Expression "do" Expression "end" ["while"]
+   | "whitespace"
+   | "XML.parse"
+   | "XML.element"
+   | "XML.attribute"
+   | "XML.attribute-name"
+   | "XML.attribute-value"
+   | "XML.element-content"
+   | "XML.element-name"
+   | "XML.element-having-tag-with"
+   | "{" [String {"," String}] "}"
+   | NativeCommand.
